@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}家庭记账系统 - 添加交易记录{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">添加交易记录</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('add_transaction') }}">
+                    {{ form.hidden_tag() }}
+
+                    <!-- 金额 -->
+                    <div class="mb-3">
+                        {{ form.amount.label(class="form-label") }}
+                        <div class="input-group">
+                            <span class="input-group-text">¥</span>
+                            {{ form.amount(class="form-control") }}
+                        </div>
+                    </div>
+
+                    <!-- 分类 -->
+                    <div class="mb-3">
+                        {{ form.category.label(class="form-label") }}
+                        {{ form.category(class="form-select" + (' is-invalid' if form.category.errors else '')) }}
+                        {% for error in form.category.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- 账户 -->
+                    <div class="mb-3">
+                        {{ form.account.label(class="form-label") }}
+                        {{ form.account(class="form-select" + (' is-invalid' if form.account.errors else '')) }}
+                        {% for error in form.account.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- 家庭成员 -->
+                    <div class="mb-3">
+                        {{ form.family_member.label(class="form-label") }}
+                        {{ form.family_member(class="form-select" + (' is-invalid' if form.family_member.errors else '')) }}
+                        {% for error in form.family_member.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- 时间 -->
+                    <div class="mb-3">
+                        {{ form.date.label(class="form-label") }}
+                        {{ form.date(class="form-control") }}
+                    </div>
+
+                    <!-- 描述 -->
+                    <div class="mb-3">
+                        {{ form.description.label(class="form-label") }}
+                        {{ form.description(class="form-control") }}
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary me-md-2">取消</a>
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

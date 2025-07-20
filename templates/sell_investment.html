@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}卖出投资产品 - 家庭记账系统{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">卖出投资产品</h4>
+                <p class="text-muted">产品名称: {{ product.name }} ({{ product.code }})</p>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('sell_investment', product_id=product.id) }}">
+                    {{ form.hidden_tag() }}
+
+                    <div class="mb-3">
+                        {{ form.holding.label(class="form-label") }}
+                        {{ form.holding(class="form-select" + (" is-invalid" if form.holding.errors else "")) }}
+                        {% if form.holding.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.holding.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <div class="form-text">选择持仓账户</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            {{ form.quantity.label(class="form-label") }}
+                            {{ form.quantity(class="form-control" + (" is-invalid" if form.quantity.errors else "")) }}
+                            {% if form.quantity.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.quantity.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">输入卖出数量</div>
+                        </div>
+                        <div class="col-md-6">
+                            {{ form.price.label(class="form-label") }}
+                            {{ form.price(class="form-control" + (" is-invalid" if form.price.errors else "")) }}
+                            {% if form.price.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.price.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">输入卖出价格（元）</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.description.label(class="form-label") }}
+                        {{ form.description(class="form-control") }}
+                        <div class="form-text">可选：添加交易备注</div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('investment_dashboard') }}" class="btn btn-outline-secondary me-md-2">取消</a>
+                        {{ form.submit(class="btn btn-danger") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

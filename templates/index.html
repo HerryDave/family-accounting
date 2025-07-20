@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}家庭记账系统 - 首页{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 text-center">
+        <h1 class="mb-4">欢迎使用家庭记账系统</h1>
+        <p class="lead mb-5">轻松管理家庭收支，掌握财务状况</p>
+        <div class="card shadow-sm">
+            <div class="card-body p-5">
+                <h3 class="card-title mb-4">系统功能</h3>
+                <ul class="list-group list-group-flush mb-5">
+                    <li class="list-group-item d-flex align-items-center">
+                        <span class="badge bg-success rounded-pill me-3">✓</span>
+                        <span>记录收入和支出明细</span>
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                        <span class="badge bg-success rounded-pill me-3">✓</span>
+                        <span>按类别统计收支情况</span>
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                        <span class="badge bg-success rounded-pill me-3">✓</span>
+                        <span>查看收支历史和趋势</span>
+                    </li>
+                </ul>
+                <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg px-5">立即登录</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}家庭记账系统 - 添加账户{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">添加新账户</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('add_account') }}">
+                    {{ form.hidden_tag() }}
+
+                    <div class="mb-3">
+                        {{ form.name.label(class="form-label") }}
+                        {{ form.name(class="form-control" + (' is-invalid' if form.name.errors else '')) }}
+                        {% for error in form.name.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.type.label(class="form-label") }}
+                        {{ form.type(class="form-select" + (' is-invalid' if form.type.errors else '')) }}
+                        {% for error in form.type.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.balance.label(class="form-label") }}
+                        <div class="input-group">
+                            <span class="input-group-text">¥</span>
+                            {{ form.balance(class="form-control" + (' is-invalid' if form.balance.errors else '')) }}
+                            {% for error in form.balance.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary me-md-2">取消</a>
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

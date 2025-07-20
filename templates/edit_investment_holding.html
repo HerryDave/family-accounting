@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}编辑持仓 - 家庭记账系统{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h2>编辑持仓信息</h2>
+        <p class="text-muted">修改投资产品的持仓数量和成本价</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">{{ holding.product.name }} ({{ holding.product.code }})</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+
+                    <div class="mb-3">
+                        {{ form.quantity.label(class="form-label") }}
+                        {{ form.quantity(class="form-control" + (' is-invalid' if form.quantity.errors else '')) }}
+                        {% for error in form.quantity.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.cost_price.label(class="form-label") }}
+                        {{ form.cost_price(class="form-control" + (' is-invalid' if form.cost_price.errors else '')) }}
+                        {% for error in form.cost_price.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('investment_dashboard') }}" class="btn btn-outline-secondary me-md-2">取消</a>
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
